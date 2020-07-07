@@ -7,7 +7,7 @@ import {LOCAL_STORAGE, WebStorageService} from 'angular-webstorage-service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'dnd-dice-routing';
+  title = 'DND Dice Tracker';
 
   public data:any=[]
 
