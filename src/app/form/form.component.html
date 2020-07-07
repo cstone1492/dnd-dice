@@ -1,0 +1,15 @@
+<div>
+    <label for='dieRollsForm'>Enter Die Rolls:</label>
+        <label for='dieType'>Die Type:</label>
+        <div *ngFor="let dieType of dieTypes">
+            <input type="radio" name="dieType" value="{{dieType}}" (change)="dieTypeChangeHandler($event)"><i>{{dieType}}</i>
+            <!--<input #dieType type='text'/>-->
+        </div>
+        <p><span>You selected : </span><b>{{selectedDieType}}</b></p>
+        <label for='rollValue'>Roll Value</label>
+        <div name ='rollValue'>
+            <input #rollValue (keyup.enter)='saveInLocal(rollValue.value)' type='integer'/>
+        </div>
+        <button (click)='saveInLocal(rollValue.value)'>Add</button>
+    
+</div>

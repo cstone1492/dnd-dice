@@ -1,0 +1,18 @@
+<table> 
+    <tr>
+        <th>Die Type</th>
+        <th>Number of Rolls</th>
+        <th>Average Roll</th>
+        <th>See Distribution</th>
+        <th>Run Chi Square</th>
+    </tr>
+    <tr *ngFor = "let dieRoll of dieRolls | keyvalue">
+        <td>{{dieRoll.key}}</td>
+        <td>{{dieRoll.value.length}}</td>
+        <td>{{this.dieRollAverage(dieRoll.value)}}</td>
+        <td><button>See Distribution</button></td>
+        <td><button (click) = "runChiSquare(dieRoll.key)">Analyze</button></td>
+        <td>{{testResults}}</td>
+    </tr>
+</table>
+
