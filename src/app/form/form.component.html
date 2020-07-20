@@ -8,7 +8,7 @@
         <p><span>You selected : </span><b>{{selectedDieType}}</b></p>
         <label for='rollValue'>Roll Value</label>
         <div name ='rollValue'>
-            <input #rollValue (keyup.enter)='saveInLocal(rollValue.value)' type='integer'/>
+            <input #rollValue (keyup.enter)="saveInLocal(rollValue.value); rollValue.value = ''" type='integer' placeholder="Enter die roll here"/>
         </div>
         <button (click)='saveInLocal(rollValue.value)'>Add</button>
     

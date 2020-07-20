@@ -17,9 +17,9 @@ export class ChiSquareFormComponent implements OnInit {
 
   selectedDieType: string = '';
 
-  testResults = '';
+  testResults: string = '';
 
-  displayResults;
+  displayResults: boolean = false;
 
   //create critical value table (only including degrees of freedom for dice, and probability of .95
   criticalValues = {
@@ -42,11 +42,11 @@ export class ChiSquareFormComponent implements OnInit {
   runChiSquare() {
     //declare variables
     
-    let output;
+    let output: string;
     let dieRollsDifference = {};
     let possibleValues = [];
 	  let dieRollsActual = {};
-	  let chiSquarePossible = false;
+	  let chiSquarePossible: boolean = false;
 
     //set displayResults to true to show conditional HTML 
     
@@ -135,7 +135,7 @@ export class ChiSquareFormComponent implements OnInit {
 }
   console.log(output);
   this.testResults = output;
-	return output;
+	//return output;
 	};
 }
 
