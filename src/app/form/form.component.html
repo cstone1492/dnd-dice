@@ -10,6 +10,6 @@
         <div name ='rollValue'>
             <input #rollValue (keyup.enter)="saveInLocal(rollValue.value); rollValue.value = ''" type='integer' placeholder="Enter die roll here"/>
         </div>
-        <button (click)='saveInLocal(rollValue.value)'>Add</button>
+        <button (click)="saveInLocal(rollValue.value); rollValue.value = ''">Add</button>
     
 </div>
