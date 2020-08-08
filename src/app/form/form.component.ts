@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { stringify } from 'querystring';
 import { formatCurrency } from '@angular/common';
 import { AppComponent } from '../app.component'
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -32,6 +33,9 @@ export class FormComponent implements OnInit {
     this.selectedDieType = event.target.value;
   }
 
+  onSubmit(form: NgForm) {
+    console.log('Your form data : ', form.value)
+  }
   saveInLocal (dieRoll: string) {
     console.log(this.selectedDieType);
     let existing = localStorage.getItem(`${this.selectedDieType}`);

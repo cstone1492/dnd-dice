@@ -1,15 +1,15 @@
 <div>
-    <label for='dieRollsForm'>Enter Die Rolls:</label>
+    <form #myform = "ngForm" (ngSubmit) = "onSubmit(myform)">
+        <label for='dieRollsForm'>Enter Die Rolls:</label>
         <label for='dieType'>Die Type:</label>
-        <div *ngFor="let dieType of dieTypes">
-            <input type="radio" name="dieType" value="{{dieType}}" (change)="dieTypeChangeHandler($event)"><i>{{dieType}}</i>
+        <div *ngFor="let dieType of dieTypes; let i = index">
+            <input type="radio" name="dieType" value = dieType [ngModel] = "dieTypes[i]"><i>{{dieType}}</i>
             <!--<input #dieType type='text'/>-->
         </div>
-        <p><span>You selected : </span><b>{{selectedDieType}}</b></p>
         <label for='rollValue'>Roll Value</label>
         <div name ='rollValue'>
-            <input #rollValue (keyup.enter)="saveInLocal(rollValue.value); rollValue.value = ''" type='integer' placeholder="Enter die roll here"/>
+            <input type='integer' placeholder="Enter die roll here" name = "rollValue" ngModel />
         </div>
-        <button (click)="saveInLocal(rollValue.value); rollValue.value = ''">Add</button>
-    
+        <input type = "submit" value = "Submit">
+    </form>
 </div>
