@@ -3,8 +3,9 @@
         <label for='dieRollsForm'>Enter Die Rolls:</label>
         <label for='dieType'>Die Type:</label>
         <div *ngFor="let dieType of dieTypes; let i = index">
-            <input type="radio" name="dieType" value = dieType [ngModel] = "dieTypes[i]"><i>{{dieType}}</i>
-            <!--<input #dieType type='text'/>-->
+            <label for="dieType{{dieType}}">
+            <input id="dieType{{dieType}}" type="radio" name="dieType" value = {{dieType}} ngModel><i>{{dieType}}</i>
+                </label>
         </div>
         <label for='rollValue'>Roll Value</label>
         <div name ='rollValue'>
