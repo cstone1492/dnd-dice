@@ -6,7 +6,7 @@ import { ChiSquareFormComponent } from './chi-square-form/chi-square-form.compon
 
 
 const routes: Routes = [
-  {path: 'data', component: UserDataComponent},
+  {path: 'user-data', component: UserDataComponent},
   {path: 'form', component: FormComponent},
   {path: 'chi-square-form', component: ChiSquareFormComponent}
 ];
