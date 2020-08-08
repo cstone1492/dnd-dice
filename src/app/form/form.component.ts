@@ -10,8 +10,6 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-  
-  selectedDieType: string = '';
 
   dieTypes: any = [
     '4',
@@ -29,22 +27,14 @@ export class FormComponent implements OnInit {
 
   }
 
-  dieTypeChangeHandler (event: any) {
-    this.selectedDieType = event.target.value;
-  }
-
   onSubmit(form: NgForm) {
-    console.log('Your form data : ', form.value)
-  }
-  saveInLocal (dieRoll: string) {
-    console.log(this.selectedDieType);
-    let existing = localStorage.getItem(`${this.selectedDieType}`);
-    console.log(existing);
+    console.log('Your form data : ', form.value);
+    let rollValue = form.value.rollValue;
+    let selectedDieType = form.value.dieType;
+    let existing = localStorage.getItem(`${selectedDieType}`);
     let existingArray = existing ? existing.split(',') : [];
-    console.log(existingArray);
-    existingArray.push(dieRoll);
-    console.log(existingArray);
-    localStorage.setItem(this.selectedDieType, existingArray.toString());
+    existingArray.push(rollValue);
+    localStorage.setItem(selectedDieType, existingArray.toString());
 
   }
 }
