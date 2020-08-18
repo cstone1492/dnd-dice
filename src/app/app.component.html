@@ -4,7 +4,17 @@
     Welcome to {{ title }}!
   </h1>
   <img width="150" alt="Dice Logo" src="assets\images\d20-2699387_1920.png">
-<h2>Some things you can do: </h2>
+
+  <link href="https://global.oktacdn.com/okta-signin-widget/4.3.2/css/okta-sign-in.min.css" type="text/css" rel="stylesheet"/>
+
+  <button routerLink="/"> Home </button>
+  <button *ngIf="!isAuthenticated" routerLink="/login"> Login </button>
+  <button *ngIf="isAuthenticated" (click)="logout()"> Logout </button>
+  <button routerLink="/protected"> Protected </button>
+  
+  <router-outlet></router-outlet>
+
+<!--<h2>Some things you can do: </h2>
 
 
 <a routerLink="/user-data">See Data</a> <br>
@@ -12,4 +22,4 @@
 <a routerLink="/chi-square-form">Analyze Data</a> <br>
 
 
-<router-outlet></router-outlet>
+<router-outlet></router-outlet>-->

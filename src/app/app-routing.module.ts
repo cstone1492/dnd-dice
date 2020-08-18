@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { OktaCallbackComponent, OktaAuthGuard } from '@okta/okta-angular';
 import { UserDataComponent } from './user-data/user-data.component';
 import { FormComponent } from './form/form.component';
 import { ChiSquareFormComponent } from './chi-square-form/chi-square-form.component';
@@ -8,9 +9,10 @@ import { CreateDieSetComponent } from './form/create-die-set/create-die-set.comp
 
 const routes: Routes = [
   {path: 'user-data', component: UserDataComponent},
-  {path: 'form', component: FormComponent},
+  {path: 'form', component: FormComponent, canActivate: [OktaAuthGuard]},
   {path: 'chi-square-form', component: ChiSquareFormComponent},
-  {path: 'create-die-set', component: CreateDieSetComponent}
+  {path: 'create-die-set', component: CreateDieSetComponent},
+  {path: 'implicit/callback', component: OktaCallbackComponent},
 ];
 
 @NgModule({
