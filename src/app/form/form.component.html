@@ -1,5 +1,9 @@
 <div>
+    
     <form #myform = "ngForm" (ngSubmit) = "onSubmit(myform)">
+        <label for='dieSet'>Die Set</label>
+        <div>die set list goes here</div>
+        <a routerLink="/create-die-set">Create new die set</a> <br>
         <label for='dieRollsForm'>Enter Die Rolls:</label>
         <label for='dieType'>Die Type:</label>
         <div *ngFor="let dieType of dieTypes; let i = index">
@@ -14,3 +18,4 @@
         <input type = "submit" value = "Submit">
     </form>
 </div>
+
