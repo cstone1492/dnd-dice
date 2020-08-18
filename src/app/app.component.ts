@@ -1,31 +1,24 @@
-import { Component, Inject } from '@angular/core';
-import {LOCAL_STORAGE, WebStorageService} from 'angular-webstorage-service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
+import { AuthenticationService } from './_services';
+import { User } from './_models';
+
+import './_content/app.less';
+
+@Component({ selector: 'app', templateUrl: 'app.component.html' })
 export class AppComponent {
-  title = 'DND Dice Tracker';
+    currentUser: User;
 
-  public data:any=[]
+    constructor(
+        private router: Router,
+        private authenticationService: AuthenticationService
+    ) {
+        this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    }
 
-  dieTypes: any = [
-    '4',
-    '6',
-    '8',
-    '10',
-    '12',
-    '20'
-  ]
-
-  constructor(@Inject(LOCAL_STORAGE) private storage: WebStorageService) {
-
-  }
-
-  dieTypesValue() {
-    return this.dieTypes;
-  }
-  
+    logout() {
+        this.authenticationService.logout();
+        this.router.navigate(['/login']);
+    }
 }

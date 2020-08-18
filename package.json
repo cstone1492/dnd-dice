@@ -1,14 +1,19 @@
 {
   "name": "dnd-dice-routing",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cstone1492/dnd-dice"
+  },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "webpack-dev-server --mode development --open",
+    "build": "webpack --mode production",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@angular/animations": "~8.2.0",
