@@ -12,18 +12,7 @@ module.exports = {
     },
     module: {
         rules: [
-            {
-                test: /\.ts$/,
-                use: ['ts-loader', 'angular2-template-loader']
-            },
-            {
-                test: /\.html$/,
-                use: 'html-loader'
-            },
-            {
-                test: /\.less$/,
-                use: ['style-loader', 'css-loader', 'less-loader']
-            },
+            
 
             // workaround for warning: System.import() is deprecated and will be removed soon. Use import() instead.
             {
