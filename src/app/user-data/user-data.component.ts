@@ -47,7 +47,7 @@ export class UserDataComponent implements OnInit {
     8: this.retrieveDieRolls("8"),
     10: this.retrieveDieRolls("10"),
     12: this.retrieveDieRolls("12"),
-    20: this.retrieveDieRolls("20")
+    20: this.retrieveDieRolls("20"),
   }
 
   dieRollAverage(dieRolls) {
@@ -60,14 +60,19 @@ export class UserDataComponent implements OnInit {
     return average;
   }
 
+
+
+  
+  testResults: string = '';
+  displayResults: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
   
   }
 
-  testResults: string = '';
-  displayResults: boolean = false;
+  
 
   runChiSquare(selectedDieType) {
     //declare variables
