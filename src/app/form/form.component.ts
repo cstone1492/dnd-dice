@@ -36,6 +36,6 @@ export class FormComponent implements OnInit {
     let existingArray = existing ? existing.split(',') : [];
     existingArray.push(rollValue);
     localStorage.setItem(selectedDieType, existingArray.toString());
-
+    form.reset();
   }
 }
