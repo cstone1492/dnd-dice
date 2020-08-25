@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { formatCurrency } from '@angular/common';
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { ChartOptions, ChartType, ChartDataSets, ChartHoverOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 
 @Component({
@@ -52,25 +52,37 @@ export class UserDataComponent implements OnInit {
     20: this.retrieveDieRolls("20"),
   }
 
-  //HISTOGRAM TEST
+  //HISTOGRAM Options
   barChartOptions: ChartOptions = {
     responsive: true,
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem) {
+          return `${tooltipItem.yLabel}`;
+        }
+      }
+    }
   };
-  barChartLabels: Label[] = ['Apple', 'Banana', 'Kiwifruit', 'Blueberry', 'Orange', 'Grapes'];
+  barChartLabels: Label[];
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
 
-  barChartData: ChartDataSets[] = [
-    { data: [45, 37, 60, 70, 46, 33], label: 'Histogram in Progress' }
-  ];
+
+  barChartData: ChartDataSets[];
 
 
+
+  selectedDie = [];
 
   //DISTRIBUTION FUNCTION 
   displayHistogram: boolean = false;
 
-  createDistribution (dieType) {
+  createStackedHistogram (dieType) {
+    this.createHistogram(dieType)
+  }
+
+  createHistogram (dieType) {
     this.displayHistogram = true;
     //create barChartLabels
     let dieValue = Number(dieType);

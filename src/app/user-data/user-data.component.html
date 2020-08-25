@@ -10,7 +10,7 @@
         <td>{{dieRoll.key}}</td>
         <td>{{dieRoll.value.length}}</td>
         <td>{{this.dieRollAverage(dieRoll.value)}}</td>
-        <td><button (click) = "createDistribution(dieRoll.key)">See Distribution</button></td>
+        <td><button (click) = "createStackedHistogram(dieRoll.key)">See Distribution</button></td>
         <td><button (click) = "runChiSquare(dieRoll.key)">Analyze</button></td>
     </tr>
 </table>
@@ -26,6 +26,7 @@
     [plugins]="barChartPlugins"
     [legend]="barChartLegend"
     [chartType]="barChartType">
+    
   </canvas>
 </div>
 
