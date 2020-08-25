@@ -62,13 +62,57 @@ export class UserDataComponent implements OnInit {
   barChartPlugins = [];
 
   barChartData: ChartDataSets[] = [
-    { data: [45, 37, 60, 70, 46, 33], label: 'Best Fruits' }
+    { data: [45, 37, 60, 70, 46, 33], label: 'Histogram in Progress' }
   ];
 
+
+
   //DISTRIBUTION FUNCTION 
+  displayHistogram: boolean = false;
 
   createDistribution (dieType) {
-    
+    this.displayHistogram = true;
+    //create barChartLabels
+    let dieValue = Number(dieType);
+    let dieSides = [];
+    for (let i = 1; i <= dieValue; i++) {
+      dieSides.push(i);
+    };
+    this.barChartLabels = dieSides;
+
+    //create data
+    var dieRolls = this.retrieveDieRolls(dieType);
+    /*var dieRollsArray = dieRolls.split(',').map(function(item) {
+      return parseInt(item, 10);
+    });*/
+
+    //count die Rolls
+    let dieRollsCounted = {};
+    let dieRollsData = []
+      //create key for each possible value in dieRollsCounted, set to 0
+      for(let item of dieSides) {
+        let newKey = item
+        dieRollsCounted[`${newKey}`] = 0;
+        //count number of rolls of that value
+        for(let i of dieRolls) {
+          if(i == item) {
+            dieRollsCounted[newKey] = dieRollsCounted[newKey] + 1;
+        }
+      }
+      console.log(`total rolls of ${item} side: ${dieRollsCounted[newKey]}`);
+      //push into Dataarray
+      dieRollsData.push(Number(`${dieRollsCounted[newKey]}`));
+      console.log(dieRollsData);
+    }
+
+    //create data for bar chart NEED TO MODIFY
+    this.barChartData = [
+      {
+        data: dieRollsData,
+        label: 'Histogram of ' + dieType +'-sided die'
+      }
+    ];
+
   }
 
 
@@ -81,8 +125,6 @@ export class UserDataComponent implements OnInit {
     let average: number = sum / dieRolls.length;
     return average;
   }
-
-
 
   
   testResults: string = '';
