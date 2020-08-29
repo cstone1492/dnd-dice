@@ -1,1 +1,32 @@
-<p>create-die-set works!</p>
+<div> 
+    <form #myform = "ngForm" (ngSubmit) = "onSubmit(myform)">
+        <label for='dieSetsForm'>Create Die Set:</label><br>
+        <label for='dieName'>Die Set Name</label>
+            <div name = 'dieName'>
+                <input type='string' placeholder="Enter name here" name = "dieName">
+            </div>
+        <label for='dieDescription'>Description:</label>
+            <div name = 'dieDescription'>
+                <input type='string' placeholder="Enter description here" name = "dieDescription">
+            </div>
+        <label for='dieType'>Die Types:</label>
+        <div>
+            <ng-select [multiple]="true" 
+                        [items]="dieTypes" 
+                        name="dieType" 
+                        bindValue="type" 
+                        bindLabel="dieType" 
+                        placeholder="Select Die Types" 
+                        required
+                        [closeOnSelect]="false"
+                        [(ngModel)]="selectDieTypes">
+                        <div *ngFor="let dieType of dieTypes; let i = index">
+                            <label for="dieType{{dieType}}">
+                            <input id="dieType{{dieType}}" type="checkbox" name="dieType" value = {{dieType}} ngModel><i>{{dieType}}</i>
+                                </label>
+                        </div>
+            </ng-select>
+        </div>
+        <input type = "submit" value = "Submit">
+    </form>
+</div>
