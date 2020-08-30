@@ -20,6 +20,8 @@ export class AppComponent {
     '20'
   ]
 
+  dieSets: any [];
+
   constructor(@Inject(LOCAL_STORAGE) private storage: WebStorageService) {
 
   }
