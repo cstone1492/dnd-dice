@@ -12,11 +12,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
   styleUrls: ['./create-die-set.component.css']
 })
 export class CreateDieSetComponent implements OnInit {
-  @ViewChild('DieSetForm', { static: false })
-  DieSetForm: NgForm;
-
-  isFormDisabled: boolean;
-  dieSetModel: number;
 
   dieTypes: [
     '4',

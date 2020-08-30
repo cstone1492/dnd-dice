@@ -1,10 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { NgSelectConfig } from '@ng-select/ng-select';
-import { ɵs } from '@ng-select/ng-select';
-
 
 import { ChartsModule } from 'ng2-charts';
 
@@ -30,10 +26,9 @@ import { CreateDieSetComponent } from './form/create-die-set/create-die-set.comp
     AppRoutingModule,
     StorageServiceModule,
     FormsModule,
-    ChartsModule,
-    NgSelectModule
+    ChartsModule
   ],
-  providers: [NgSelectConfig, ɵs],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
