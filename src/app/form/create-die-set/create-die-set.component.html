@@ -1,1 +1,20 @@
-<p>create-die-set works!</p>
+<div>
+    
+    <form #myform = "ngForm" (ngSubmit) = "onSubmit(myform)">
+        <label for='dieSet'>Die Set</label>
+        <div>die set list goes here</div>
+        <a routerLink="/create-die-set">Create new die set</a> <br>
+        <label for='dieRollsForm'>Enter Die Rolls:</label>
+        <label for='dieType'>Die Type:</label>
+        <div *ngFor="let dieType of dieTypes; let i = index">
+            <label for="dieType{{dieType}}">
+            <input id="dieType{{dieType}}" type="radio" name="dieType" value = {{dieType}} ngModel><i>{{dieType}}</i>
+                </label>
+        </div>
+        <label for='rollValue'>Roll Value</label>
+        <div name ='rollValue'>
+            <input type='integer' placeholder="Enter die roll here" name = "rollValue" ngModel />
+        </div>
+        <input type = "submit" value = "Submit">
+    </form>
+</div>
