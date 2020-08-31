@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { stringify } from 'querystring';
 import { formatCurrency } from '@angular/common';
-import { AppComponent } from '../'
+import { FormComponent } from '../form/form.component';
+import { DieSetsComponent } from '../die-sets/die-sets.component';
 import {NgForm, FormArray} from '@angular/forms';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
@@ -61,13 +62,31 @@ export class CreateDieSetComponent implements OnInit {
       let key = dieSetName + item;
       localStorage.setItem( key , "" );
     }
+
+    //add to dieSets list
     let newDieSet = {
       name: dieSetName,
       dieTypes: selectedDieTypes
     }
 
-    AppComponent.dieSets.push(newDieSet);
+    if (localStorage.getItem("dieSets") === null) {
+      localStorage.setItem( "dieSets", JSON.stringify(newDieSet) + `\n`);
+    } else {
+      let existing = localStorage.getItem("dieSets") + `\n` + JSON.stringify(newDieSet);
+      localStorage.setItem( "dieSets", existing + `\n`);
+    }
+    //this.dieSetsComponent.dieSets.push(newDieSet);
+    //console.log(this.dieSetsComponent)
 
+/*
+    let rollValue = form.value.rollValue;
+    let selectedDieType = form.value.dieType;
+    let existing = localStorage.getItem(`${selectedDieType}`);
+    let existingArray = existing ? existing.split(',') : [];
+    existingArray.push(rollValue);
+    localStorage.setItem(selectedDieType, existingArray.toString());
+    form.reset();*/
+    //this.dieSetForm.value.dieTypesCheck.clear();
     this.dieSetForm.reset();
   }
 

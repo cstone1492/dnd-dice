@@ -3,7 +3,7 @@ import { stringify } from 'querystring';
 import { formatCurrency } from '@angular/common';
 import { AppComponent } from '../app.component'
 import {NgForm} from '@angular/forms';
-import { CreateDieSetComponent } from './create-die-set/create-die-set.component';
+import { CreateDieSetComponent } from '../create-die-set/create-die-set.component';
 
 @Component({
   selector: 'app-form',

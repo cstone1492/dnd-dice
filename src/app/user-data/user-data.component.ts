@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { formatCurrency } from '@angular/common';
 import { ChartOptions, ChartType, ChartDataSets, ChartHoverOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { DieSetsComponent } from '../die-sets/die-sets.component';
 
 @Component({
   selector: 'app-user-data',
