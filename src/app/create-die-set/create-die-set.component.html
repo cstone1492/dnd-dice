@@ -1,5 +1,5 @@
-<div>
-    <form [formGroup]="dieSetForm" (ngSubmit)="submitForm()" novalidate>
+<div class = "main-component">
+    <form class = "form-group" [formGroup]="dieSetForm" (ngSubmit)="submitForm()" novalidate>
         <!-- Form elements goes here -->
         <label>Name:
             <div>
@@ -12,9 +12,9 @@
         </label>
         <br/>
         <label>Die Types:
-        <div *ngFor="let dieType of dieTypes; let i = index">
-            <label for="dieType{{dieType}}">
-                <input 
+        <div class = "form-check" *ngFor="let dieType of dieTypes; let i = index">
+            <label class = "form-check-lable" for="dieType{{dieType}}">
+                <input class = "form-check-input"
                 id="dieType{{dieType}}" 
                 type="checkbox" name="dieType" 
                 [value] = "dieType.value" 

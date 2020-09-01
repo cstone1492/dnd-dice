@@ -1,21 +1,27 @@
-<div>
-    
-    <form #myform = "ngForm" (ngSubmit) = "onSubmit(myform)">
-        <label for='dieSet'>Die Set</label>
-        <div>die set list goes here</div>
-        <a routerLink="/create-die-set">Create new die set</a> <br>
-        <label for='dieRollsForm'>Enter Die Rolls:</label>
-        <label for='dieType'>Die Type:</label>
-        <div *ngFor="let dieType of dieTypes; let i = index">
-            <label for="dieType{{dieType}}">
-            <input id="dieType{{dieType}}" type="radio" name="dieType" value = {{dieType}} ngModel><i>{{dieType}}</i>
-                </label>
+
+<div class = "main-component">
+    <form  class = "form-group" #myform = "ngForm" (ngSubmit) = "onSubmit(myform)">
+        <div class = "form-group row" name = "dieSet">
+            <label for='dieSet'>Die Set:</label>
+            <div>die set list goes here</div><br>
+            <a routerLink="/create-die-set">Create new die set</a> <br>
         </div>
-        <label for='rollValue'>Roll Value</label>
-        <div name ='rollValue'>
-            <input type='integer' placeholder="Enter die roll here" name = "rollValue" ngModel />
+        <label class="col-sm-2 col-form-label" for='dieType'>Die Type:
+        <div class = "form-check" *ngFor="let dieType of dieTypes; let i = index">
+            <label class = "form-check-label" for="dieType{{dieType}}">
+            <input class = "form-check-input" id="dieType{{dieType}}" type="radio" name="dieType" value = {{dieType}} ngModel><i>{{dieType}}</i>
+            </label>
         </div>
-        <input type = "submit" value = "Submit">
+        </label>
+        <br>
+        
+        <div class = "form-group row" name ='rollValue'>
+            <label class="col-sm-2 col-form-label" for='rollValue'>Roll Value:</label>
+            <div class = "col-sm-10">
+                <input type='integer' class="form-control small-text" placeholder="Enter roll" name = "rollValue" ngModel />
+            </div>
+        </div>
+        <input class= "btn btn-primary" type = "submit" value = "Submit">
     </form>
 </div>
 

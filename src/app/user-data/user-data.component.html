@@ -1,19 +1,23 @@
-<table> 
+<div class="main-component">
+<table class = "table table-hover"> 
     <tr>
-        <th>Die Type</th>
-        <th>Number of Rolls</th>
-        <th>Average Roll</th>
-        <th>See Distribution</th>
-        <th>Run Chi Square</th>
+        <th scope="col">Die Type</th>
+        <th scope="col">Number of Rolls</th>
+        <th scope="col">Average Roll</th>
+        <th scope="col">See Distribution</th>
+        <th scope="col">Run Chi Square</th>
     </tr>
+    <tbody>
     <tr *ngFor = "let dieRoll of dieRolls | keyvalue">
-        <td>{{dieRoll.key}}</td>
+        <td scope="col">D{{dieRoll.key}}</td>
         <td>{{dieRoll.value.length}}</td>
         <td>{{this.dieRollAverage(dieRoll.value)}}</td>
-        <td><button (click) = "createStackedHistogram(dieRoll.key)">See Distribution</button></td>
-        <td><button (click) = "runChiSquare(dieRoll.key)">Analyze</button></td>
+        <td><button type = "button" class="btn btn-primary" (click) = "createStackedHistogram(dieRoll.key)">See Distribution</button></td>
+        <td><button type = "button"  class="btn btn-success"(click) = "runChiSquare(dieRoll.key)">Analyze</button></td>
     </tr>
+    </tbody>
 </table>
+</div>
 <div>
 {{testResults}}
 </div>

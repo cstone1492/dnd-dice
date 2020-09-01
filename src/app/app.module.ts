@@ -12,6 +12,8 @@ import { FormComponent } from './form/form.component';
 import { ChiSquareFormComponent } from './chi-square-form/chi-square-form.component';
 import { CreateDieSetComponent } from './create-die-set/create-die-set.component';
 import { DieSetsComponent } from './die-sets/die-sets.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { DieSetsComponent } from './die-sets/die-sets.component';
     FormComponent,
     ChiSquareFormComponent,
     CreateDieSetComponent,
-    DieSetsComponent
+    DieSetsComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

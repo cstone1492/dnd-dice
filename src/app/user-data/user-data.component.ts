@@ -136,7 +136,7 @@ export class UserDataComponent implements OnInit {
       sum += i;
     }
     let average: number = sum / dieRolls.length;
-    return average;
+    return Math.round(average);
   }
 
   
