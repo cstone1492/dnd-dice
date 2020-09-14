@@ -70,10 +70,10 @@ export class CreateDieSetComponent implements OnInit {
     }
 
     if (localStorage.getItem("dieSets") === null) {
-      localStorage.setItem( "dieSets", JSON.stringify(newDieSet) + `\n`);
+      localStorage.setItem( "dieSets", JSON.stringify(newDieSet));
     } else {
-      let existing = localStorage.getItem("dieSets") + `\n` + JSON.stringify(newDieSet);
-      localStorage.setItem( "dieSets", existing + `\n`);
+      let existing = localStorage.getItem("dieSets") + `,` + JSON.stringify(newDieSet);
+      localStorage.setItem( "dieSets", existing);
     }
     //this.dieSetsComponent.dieSets.push(newDieSet);
     //console.log(this.dieSetsComponent)
@@ -87,6 +87,7 @@ export class CreateDieSetComponent implements OnInit {
     localStorage.setItem(selectedDieType, existingArray.toString());
     form.reset();*/
     //this.dieSetForm.value.dieTypesCheck.clear();
+    (this.dieSetForm.get('dieTypesCheck') as FormArray).clear();
     this.dieSetForm.reset();
   }
 

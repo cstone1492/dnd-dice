@@ -128,17 +128,34 @@ export class UserDataComponent implements OnInit {
 
   }
 
+  numberOfRolls(die) {
+    if (this.dieRollAverage(die) == "no die rolls stored") {
+      return "0";
+    } else {
+      return die.length;
+    }
+  }
 
   dieRollAverage(dieRolls) {
     //sum die Rolls
-    let sum: number = 0;
-    for (let i of dieRolls) {
-      sum += i;
-    }
-    let average: number = sum / dieRolls.length;
-    return Math.round(average);
+      let sum: number = 0;
+      for (let i of dieRolls) {
+        sum += i;
+      }
+      let average: number = sum / dieRolls.length;
+      average = Math.round(average);
+      if (isNaN(average)) {
+        return "no die rolls stored";
+      } else {
+        return average;
+      }
+    
   }
 
+  clearDieRolls(key) {
+    localStorage.setItem(key, '');
+    console.log(localStorage.getItem(key))
+  }
   
   testResults: string = '';
   displayResults: boolean = false;

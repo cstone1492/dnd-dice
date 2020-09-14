@@ -10,10 +10,11 @@
     <tbody>
     <tr *ngFor = "let dieRoll of dieRolls | keyvalue">
         <td scope="col">D{{dieRoll.key}}</td>
-        <td>{{dieRoll.value.length}}</td>
+        <td>{{numberOfRolls(dieRoll.value)}}</td>
         <td>{{this.dieRollAverage(dieRoll.value)}}</td>
         <td><button type = "button" class="btn btn-primary" (click) = "createStackedHistogram(dieRoll.key)">See Distribution</button></td>
         <td><button type = "button"  class="btn btn-success"(click) = "runChiSquare(dieRoll.key)">Analyze</button></td>
+        <td><button type = "button" class="btn btn-danger" (click) = "clearDieRolls(dieRoll.key)">Clear Die Rolls</button> </td>
     </tr>
     </tbody>
 </table>
