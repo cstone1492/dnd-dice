@@ -12,20 +12,17 @@ import { FormBuilder } from '@angular/forms';
 })
 export class FormComponent implements OnInit {
 
-  dieTypes: any = [
-    '4',
-    '6',
-    '8',
-    '10',
-    '12',
-    '20'
-  ]
+  dieTypes: any = [];
+  selectedDieSet;
+  selectedDieTypes: any = [];
+  dieSets: any[] = [];
+  dieSetSelect = false;
 
   constructor(public fb: FormBuilder) { }
 
 
   ngOnInit() {
-
+    this.retrieveDieSets();
   }
 
   onSubmit(form: NgForm) {
@@ -39,11 +36,34 @@ export class FormComponent implements OnInit {
     form.reset();
   }
 
+  /***DIE SET FUNCTIONS ***/
+
+  
+  
+  retrieveDieSets() {
+    let dieSetsArray = localStorage.getItem('dieSets').split(';');
+    for (let i of dieSetsArray) {
+      this.dieSets.push(JSON.parse(i));
+    }
+    console.log(typeof this.dieSets[0]);
+  }
+
   dieSetsForm = this.fb.group({
     name: ['']
   })
 
   selectDieSet() {
-    alert(JSON.stringify(this.dieSetsForm.value))
+    console.log(this.dieSetsForm.value)
+    this.selectedDieSet=this.dieSetsForm.value['name'];
+    for (let i of this.dieSets) {
+      if (i['name'] == this.selectedDieSet) {
+        this.selectedDieTypes = i['dieTypes'];
+        this.dieTypes = i['dieTypes'];
+        console.log(this.selectedDieTypes)
+      }
+    }
+    this.dieSetSelect = true;
   }
+
+
 }

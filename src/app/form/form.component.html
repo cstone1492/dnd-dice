@@ -1,7 +1,7 @@
 
 <div class = "main-component">
-
-    <form [formGroup]="dieSetsForm" (ngSubmit)="selectDieSet()">
+    <label for='dieSet'>Select die set:</label>
+    <form name='dieSet' [formGroup]="dieSetsForm" (ngSubmit)="selectDieSet()">
 
         <select formControlName="name">
             <option disabled>Select Die Set</option>
@@ -11,13 +11,9 @@
 
         <button class = "btn btn-secondary">Submit</button>
     </form>
-    
-    <form  class = "form-group" #myform = "ngForm" (ngSubmit) = "onSubmit(myform)">
-        <div class = "form-group row" name = "dieSet">
-            <label for='dieSet'>Die Set:</label>
-            <div>die set list goes here</div><br>
-            <a routerLink="/create-die-set">Create new die set</a> <br>
-        </div>
+    <a routerLink="/create-die-set">Create new die set</a> <br>
+
+    <form  *ngIf='dieSetSelect' class = "form-group" #myform = "ngForm" (ngSubmit) = "onSubmit(myform)">
         <label class="col-sm-2 col-form-label" for='dieType'>Die Type:
         <div class = "form-check" *ngFor="let dieType of dieTypes; let i = index">
             <label class = "form-check-label" for="dieType{{dieType}}">
