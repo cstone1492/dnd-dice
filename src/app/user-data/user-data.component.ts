@@ -3,6 +3,8 @@ import { formatCurrency } from '@angular/common';
 import { ChartOptions, ChartType, ChartDataSets, ChartHoverOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { DieSetsComponent } from '../die-sets/die-sets.component';
+import { isNull, isNullOrUndefined } from 'util';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-user-data',
@@ -35,13 +37,25 @@ export class UserDataComponent implements OnInit {
     `${this.twenty}`
   ]
 
-  fourArray: number[];
+  dieSets: any[] = [];
   
+  retrieveDieSets() {
+    let dieSetsArray = localStorage.getItem('dieSets').split(';');
+    for (let i of dieSetsArray) {
+      this.dieSets.push(JSON.parse(i));
+    }
+    console.log(this.dieSets)
+    
+  }
 
   retrieveDieRolls(dieType: string) {
     let dieRollsString = localStorage.getItem(dieType);
-    let dieRollsNumbers = dieRollsString.split(',').map(function(num) { return parseInt(num, 10); });
-    return dieRollsNumbers;
+    if (isNullOrUndefined(dieRollsString)) {
+      return "No rolls stored";
+    } else {
+      let dieRollsNumbers = dieRollsString.split(',').map(function(num) { return parseInt(num, 10); });
+      return dieRollsNumbers;
+    }
   }
 
   dieRolls = {
@@ -72,8 +86,6 @@ export class UserDataComponent implements OnInit {
 
   barChartData: ChartDataSets[];
 
-
-
   selectedDie = [];
 
   //DISTRIBUTION FUNCTION 
@@ -95,9 +107,6 @@ export class UserDataComponent implements OnInit {
 
     //create data
     var dieRolls = this.retrieveDieRolls(dieType);
-    /*var dieRollsArray = dieRolls.split(',').map(function(item) {
-      return parseInt(item, 10);
-    });*/
 
     //count die Rolls
     let dieRollsCounted = {};
@@ -118,7 +127,7 @@ export class UserDataComponent implements OnInit {
       console.log(dieRollsData);
     }
 
-    //create data for bar chart NEED TO MODIFY
+    //create data for bar chart 
     this.barChartData = [
       {
         data: dieRollsData,
@@ -128,6 +137,9 @@ export class UserDataComponent implements OnInit {
 
   }
 
+
+  //STATISTICS FUNCTIONS
+  
   numberOfRolls(die) {
     if (this.dieRollAverage(die) == "no die rolls stored") {
       return "0";
@@ -160,13 +172,23 @@ export class UserDataComponent implements OnInit {
   testResults: string = '';
   displayResults: boolean = false;
 
-  constructor() { }
+  constructor(public fb: FormBuilder) {
+    
+   }
 
   ngOnInit() {
-  
+    this.retrieveDieSets();
   }
 
-  
+  //Display Die SEts drop down
+
+  dieSetsForm = this.fb.group({
+    name: ['']
+  })
+
+  selectDieSet() {
+    alert(JSON.stringify(this.dieSetsForm.value))
+  }
 
   runChiSquare(selectedDieType) {
     //declare variables

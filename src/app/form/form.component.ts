@@ -4,7 +4,7 @@ import { formatCurrency } from '@angular/common';
 import { AppComponent } from '../app.component'
 import {NgForm} from '@angular/forms';
 import { CreateDieSetComponent } from '../create-die-set/create-die-set.component';
-
+import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -21,7 +21,7 @@ export class FormComponent implements OnInit {
     '20'
   ]
 
-  constructor() { }
+  constructor(public fb: FormBuilder) { }
 
 
   ngOnInit() {
@@ -37,5 +37,13 @@ export class FormComponent implements OnInit {
     existingArray.push(rollValue);
     localStorage.setItem(selectedDieType, existingArray.toString());
     form.reset();
+  }
+
+  dieSetsForm = this.fb.group({
+    name: ['']
+  })
+
+  selectDieSet() {
+    alert(JSON.stringify(this.dieSetsForm.value))
   }
 }

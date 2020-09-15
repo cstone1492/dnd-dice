@@ -1,5 +1,17 @@
 
 <div class = "main-component">
+
+    <form [formGroup]="dieSetsForm" (ngSubmit)="selectDieSet()">
+
+        <select formControlName="name">
+            <option disabled>Select Die Set</option>
+            <option>Choose Die Set</option> 
+            <option *ngFor="let dieSet of dieSets">{{dieSet['name']}}</option>
+        </select>
+
+        <button class = "btn btn-secondary">Submit</button>
+    </form>
+    
     <form  class = "form-group" #myform = "ngForm" (ngSubmit) = "onSubmit(myform)">
         <div class = "form-group row" name = "dieSet">
             <label for='dieSet'>Die Set:</label>

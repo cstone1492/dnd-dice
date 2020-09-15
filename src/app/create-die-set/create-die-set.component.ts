@@ -72,21 +72,11 @@ export class CreateDieSetComponent implements OnInit {
     if (localStorage.getItem("dieSets") === null) {
       localStorage.setItem( "dieSets", JSON.stringify(newDieSet));
     } else {
-      let existing = localStorage.getItem("dieSets") + `,` + JSON.stringify(newDieSet);
-      localStorage.setItem( "dieSets", existing);
+      let dieSets = localStorage.getItem("dieSets") + `;` + JSON.stringify(newDieSet);
+      localStorage.setItem( "dieSets", dieSets);
     }
-    //this.dieSetsComponent.dieSets.push(newDieSet);
-    //console.log(this.dieSetsComponent)
 
-/*
-    let rollValue = form.value.rollValue;
-    let selectedDieType = form.value.dieType;
-    let existing = localStorage.getItem(`${selectedDieType}`);
-    let existingArray = existing ? existing.split(',') : [];
-    existingArray.push(rollValue);
-    localStorage.setItem(selectedDieType, existingArray.toString());
-    form.reset();*/
-    //this.dieSetForm.value.dieTypesCheck.clear();
+    //reset Form 
     (this.dieSetForm.get('dieTypesCheck') as FormArray).clear();
     this.dieSetForm.reset();
   }
