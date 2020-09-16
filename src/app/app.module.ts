@@ -14,6 +14,7 @@ import { CreateDieSetComponent } from './create-die-set/create-die-set.component
 import { DieSetsComponent } from './die-sets/die-sets.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { DiceRollerComponent } from './dice-roller/dice-roller.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FooterComponent } from './footer/footer.component';
     CreateDieSetComponent,
     DieSetsComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    DiceRollerComponent
   ],
   imports: [
     BrowserModule,
