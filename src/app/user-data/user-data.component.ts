@@ -65,6 +65,13 @@ export class UserDataComponent implements OnInit {
 
   //HISTOGRAM Options
   barChartOptions: ChartOptions = {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    },
     responsive: true,
     tooltips: {
       callbacks: {
@@ -82,9 +89,8 @@ export class UserDataComponent implements OnInit {
 
   barChartData: ChartDataSets[];
 
-  selectedDie = [];
-
-  //DISTRIBUTION FUNCTION 
+  /*******DISTRIBUTION FUNCTION********/
+  /************************************/
   displayHistogram: boolean = false;
 
   createStackedHistogram (dieType) {
@@ -101,18 +107,17 @@ export class UserDataComponent implements OnInit {
     };
     this.barChartLabels = dieSides;
 
-    //create data
-    var dieRolls = this.retrieveDieRolls(dieType);
-
     //count die Rolls
     let dieRollsCounted = {};
     let dieRollsData = []
       //create key for each possible value in dieRollsCounted, set to 0
       for(let item of dieSides) {
-        let newKey = item
+        let newKey = item;
+        console.log(`counting sides for side ${item}`);
         dieRollsCounted[`${newKey}`] = 0;
         //count number of rolls of that value
-        for(let i of dieRolls) {
+        for(let i of this.dieRolls[`${dieType}`]) {
+          console.log(item);
           if(i == item) {
             dieRollsCounted[newKey] = dieRollsCounted[newKey] + 1;
         }
@@ -120,7 +125,7 @@ export class UserDataComponent implements OnInit {
       console.log(`total rolls of ${item} side: ${dieRollsCounted[newKey]}`);
       //push into Dataarray
       dieRollsData.push(Number(`${dieRollsCounted[newKey]}`));
-      console.log(dieRollsData);
+      console.log(`dieRollsData: ${dieRollsData}`);
     }
 
     //create data for bar chart 
@@ -134,7 +139,8 @@ export class UserDataComponent implements OnInit {
   }
 
 
-  //STATISTICS FUNCTIONS
+  /*STATISTICS FUNCTIONS*/
+  /**********************/
   
   numberOfRolls(die) {
     if (this.dieRollAverage(die) == "no die rolls stored") {
@@ -176,7 +182,8 @@ export class UserDataComponent implements OnInit {
     this.retrieveDieSets();
   }
 
-  //Display Die Sets drop down
+  /*Die Set Selection*/
+  /*******************/
 
   dieSetsForm = this.fb.group({
     name: ['']
@@ -200,6 +207,7 @@ export class UserDataComponent implements OnInit {
 
   /****CHI SQUARE *****/
   /********************/
+  
   runChiSquare(selectedDieType) {
     //declare variables
     let output;
@@ -226,7 +234,8 @@ export class UserDataComponent implements OnInit {
       //retrieve key of relevant array of die rolls
 
       var dieType = selectedDieType;
-      var dieRolls = localStorage.getItem(dieType);
+      var dieRolls = localStorage.getItem(`${this.selectedDieSet['name']}${dieType}`);
+      console.log(`dieRolls: ${dieRolls}`);
       var dieSides = Number(dieType);
       console.log(`dieType: ${selectedDieType} dieRolls: ${dieRolls}`);
 
