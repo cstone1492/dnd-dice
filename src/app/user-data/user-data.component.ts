@@ -12,14 +12,11 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./user-data.component.css']
 })
 export class UserDataComponent implements OnInit {
-  dieTypes: string[] = [
-    '4',
-    '6',
-    '8',
-    '10',
-    '12',
-    '20'
-  ]
+  dieTypes: string[] = [];
+  selectedDieSet;
+  selectedDieTypes: any = [];
+  dieSets: any[] = [];
+  dieSetSelect = false;
   
   four: string = '';
   six: string = '';
@@ -36,8 +33,6 @@ export class UserDataComponent implements OnInit {
     `${this.twelve}`,
     `${this.twenty}`
   ]
-
-  dieSets: any[] = [];
   
   retrieveDieSets() {
     let dieSetsArray = localStorage.getItem('dieSets').split(';');
@@ -49,7 +44,8 @@ export class UserDataComponent implements OnInit {
   }
 
   retrieveDieRolls(dieType: string) {
-    let dieRollsString = localStorage.getItem(dieType);
+    let dieRollsString = localStorage.getItem(`${this.selectedDieSet['name']}${dieType}`);
+    console.log(dieRollsString);
     if (isNullOrUndefined(dieRollsString)) {
       return "No rolls stored";
     } else {
@@ -58,13 +54,13 @@ export class UserDataComponent implements OnInit {
     }
   }
 
-  dieRolls = {
-    4: this.retrieveDieRolls("4"),
-    6: this.retrieveDieRolls("6"),
-    8: this.retrieveDieRolls("8"),
-    10: this.retrieveDieRolls("10"),
-    12: this.retrieveDieRolls("12"),
-    20: this.retrieveDieRolls("20"),
+  dieRolls = {};
+
+  createDieRollsObject() {
+    for (let i of this.selectedDieTypes){
+      this.dieRolls[`${i}`] = this.retrieveDieRolls(`${i}`)
+    }
+    console.log(this.dieRolls);
   }
 
   //HISTOGRAM Options
@@ -180,16 +176,30 @@ export class UserDataComponent implements OnInit {
     this.retrieveDieSets();
   }
 
-  //Display Die SEts drop down
+  //Display Die Sets drop down
 
   dieSetsForm = this.fb.group({
     name: ['']
   })
 
   selectDieSet() {
-    alert(JSON.stringify(this.dieSetsForm.value))
+    this.selectedDieSet = this.dieSetsForm.value;
+    console.log(this.selectedDieSet);
+    for (let i of this.dieSets) {
+      console.log(i);
+      if (i['name'] == this.selectedDieSet['name']) {
+        this.selectedDieTypes = i['dieTypes'];
+        this.dieTypes = i['dieTypes'];
+        console.log(this.selectedDieTypes)
+      }
+    }
+    this.dieSetSelect = true;
+    this.createDieRollsObject();
+    console.log(this.dieRolls);
   }
 
+  /****CHI SQUARE *****/
+  /********************/
   runChiSquare(selectedDieType) {
     //declare variables
     let output;

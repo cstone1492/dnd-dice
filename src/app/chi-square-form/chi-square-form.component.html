@@ -1,4 +1,16 @@
-<div>
+<div class = "main-component">
+    <label for='dieSet'>Select die set:</label>
+    <form name='dieSet' [formGroup]="dieSetsForm" (ngSubmit)="selectDieSet()">
+
+        <select formControlName="name">
+            <option disabled>Select Die Set</option>
+            <option>Choose Die Set</option> 
+            <option *ngFor="let dieSet of dieSets">{{dieSet['name']}}</option>
+        </select>
+
+        <button class = "btn btn-secondary">Submit</button>
+    </form>
+    <a routerLink="/create-die-set">Create new die set</a> <br>
     <form id='chiSquareForm'>
         <label for='dieType'>Die Type:</label>
         <div *ngFor="let dieType of dieTypes">
