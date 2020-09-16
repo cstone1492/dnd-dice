@@ -29,16 +29,17 @@ export class FormComponent implements OnInit {
     console.log('Your form data : ', form.value);
     let rollValue = form.value.rollValue;
     let selectedDieType = form.value.dieType;
-    let existing = localStorage.getItem(`${selectedDieType}`);
+    console.log(this.selectedDieSet);
+    let existing = localStorage.getItem(`${this.selectedDieSet}${selectedDieType}`);
+    console.log(existing);
     let existingArray = existing ? existing.split(',') : [];
+    console.log(existingArray);
     existingArray.push(rollValue);
-    localStorage.setItem(selectedDieType, existingArray.toString());
+    localStorage.setItem(`${this.selectedDieSet}${selectedDieType}`, existingArray.toString());
     form.reset();
   }
 
   /***DIE SET FUNCTIONS ***/
-
-  
   
   retrieveDieSets() {
     let dieSetsArray = localStorage.getItem('dieSets').split(';');
