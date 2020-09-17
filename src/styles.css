@@ -21,3 +21,14 @@
 .dropdown:hover>.dropdown-menu {
     display: block;
   }
+
+.left-element {
+    margin-right: 10px;
+}
+
+.outcome {
+    font-size: 20px;
+    border: 1px solid red;
+    border-radius: 2px;
+    
+}

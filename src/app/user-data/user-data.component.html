@@ -1,8 +1,8 @@
-<div class="main-component">
+<div class="main-component d-flex justify-content-center align-items-start flex-column">
 
-    <form [formGroup]="dieSetsForm" (ngSubmit)="selectDieSet()">
+    <form class="mx-auto mb-auto p-2" [formGroup]="dieSetsForm" (ngSubmit)="selectDieSet()">
 
-        <select formControlName="name">
+        <select class="left-element" formControlName="name">
             <option disabled>Select Die Set</option>
             <option>Choose Die Set</option> 
             <option *ngFor="let dieSet of dieSets">{{dieSet['name']}}</option>
@@ -18,6 +18,7 @@
         <th scope="col">Average Roll</th>
         <th scope="col">See Distribution</th>
         <th scope="col">Run Chi Square</th>
+        <th scope="col">Clear Die Rolls</th>
     </tr>
     <tbody>
     <tr *ngFor = "let dieRoll of dieRolls | keyvalue">
@@ -30,8 +31,9 @@
     </tr>
     </tbody>
 </table>
-</div>
-<div>
+
+<br>
+<div *ngIf = "displayResults" class="p-2 mx-auto outcome text-center">
 {{testResults}}
 </div>
 
@@ -45,5 +47,6 @@
     [chartType]="barChartType">
     
   </canvas>
+</div>
 </div>
 

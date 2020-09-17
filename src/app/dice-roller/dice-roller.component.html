@@ -1,1 +1,17 @@
-<p>dice-roller works!</p>
+<div class = "main-component d-flex justify-content-center align-items-start flex-column">
+    
+    <form class="mx-auto mb-auto p-2" name='dieType' [formGroup]='rollDieForm' (ngSubmit)="rollDie()">
+       
+        <select class = "left-element" formControlName="name">
+            <option value = '' disabled>Select die type</option>
+            <option *ngFor="let dieType of dieTypes">{{dieType}}</option>
+        </select>
+
+        <button type="submit" class = "btn btn-primary">Roll Die</button>
+    </form>
+    <br>
+    <div class="p-2 mx-auto outcome"*ngIf = 'dieRolled'>
+        {{rollValue}}
+    </div>
+</div>
+

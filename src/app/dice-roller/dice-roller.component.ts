@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import { createPopper } from '@popperjs/core';
 
 @Component({
   selector: 'app-dice-roller',
@@ -7,9 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DiceRollerComponent implements OnInit {
 
-  constructor() { }
+  dieTypes = ['4','6','8','10','12','20']
+
+  dieType;
+
+  dieRolled = false;
+
+  rollValue = 0;
+
+  constructor(public fb: FormBuilder) { }
 
   ngOnInit() {
+  }
+
+  rollDieForm = this.fb.group({
+    name: ['']
+  })
+
+  rollDie(form: NgForm) {
+    this.dieType = Number(this.rollDieForm.value['name']);
+    this.dieRolled = true;
+    this.rollValue = Math.round(Math.random()*this.dieType);
   }
 
 }

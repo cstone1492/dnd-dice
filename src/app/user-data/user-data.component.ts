@@ -209,12 +209,13 @@ export class UserDataComponent implements OnInit {
   /********************/
   
   runChiSquare(selectedDieType) {
+    console.log('calculating Chi Square');
     //declare variables
     let output;
     let dieRollsDifference = [];
     let possibleValues = [];
 	  let dieRollsActual = {};
-	  let chiSquarePossible = false;
+    let chiSquarePossible = false;
 
     //set displayResults to true to show conditional HTML 
     this.displayResults = true;
@@ -229,82 +230,75 @@ export class UserDataComponent implements OnInit {
 	    19: 30.144
     }
 
-    
-
-      //retrieve key of relevant array of die rolls
-
+    //retrieve key of relevant array of die rolls
       var dieType = selectedDieType;
       var dieRolls = localStorage.getItem(`${this.selectedDieSet['name']}${dieType}`);
-      console.log(`dieRolls: ${dieRolls}`);
       var dieSides = Number(dieType);
-      console.log(`dieType: ${selectedDieType} dieRolls: ${dieRolls}`);
 
-      //turn die rolls into array of numbers
-
+    //turn die rolls into array of numbers
       var dieRollsArray = dieRolls.split(',').map(function(item) {
         return parseInt(item, 10);
       });
-      console.log(`die rolls: ${dieRollsArray.length}; ${dieRollsArray}`);
+      console.log(`die rolls for D${selectedDieType}: ${dieRollsArray.length}; ${dieRollsArray}`);
     
     //check there are enough rolls
-    
-    let totalRolls = dieRolls.length
-	  let dieRollsExpected = totalRolls / dieSides;
+    let totalRolls = dieRollsArray.length
+    let dieRollsExpected = totalRolls / dieSides;
+    console.log(`Die Rolls Expected(${totalRolls}/${dieSides}): ${dieRollsExpected}`);
 	  if (dieSides * 5 > dieRolls.length || dieRolls == null) {
-		  console.log("not enough rolls of this die, collect more data!");
 		  output = "not enough rolls of this die, collect more data!";
 	  } else {
-      //create an array of possible die values
       
-      for(let i = 1; i <= dieSides; i ++){
+    //create an array of possible die values 
+    for(let i = 1; i <= dieSides; i ++){
         possibleValues.push(i);
-      }
+    }
     
-      //create key for each possible value in dieRollsCounted, set to 0
-      for(let item of possibleValues) {
-        let newKey = item
-        dieRollsActual[`${newKey}`] = 0;
-      
+    //create key for each possible value in dieRollsCounted, set to 0
+    for(let item of possibleValues) {
+      let newKey = item
+      dieRollsActual[`${newKey}`] = 0;
       //count number of rolls of that value
       for(let i of dieRollsArray) {
         if(i === item) {
           dieRollsActual[newKey] = dieRollsActual[newKey] + 1;
         }
       }
-      }
+      console.log(`${item} total: ${dieRollsActual[newKey]}`);
+    }
     
+    //create object of differences between actual and expected
+    for(let item in dieRollsActual) {
+      let newKey = item;
+      console.log(newKey);
+      console.log(`difference for ${item}: ${dieRollsActual[item]}`);
+      console.log(dieRollsExpected);
+      let difference = (dieRollsActual[item] - dieRollsExpected)**2 / dieRollsExpected;
+      console.log(difference);
+      dieRollsDifference[newKey] = difference;
+    }
+    console.log(`die roll differences: ${dieRollsDifference}`);
     
-      //create object of differences between actual and expected
-      
-      for(let item in dieRollsActual) {
-        let newKey = item;
-        let difference = (dieRollsActual[item] - dieRollsExpected)**2 / dieRollsExpected;
-        dieRollsDifference[newKey] = difference;
-      }
-      console.log(`dieRollDifference: ${dieRollsDifference}`);
-    
-      //calculate sum of difference
-      
-      let chi = 0;
-      for (let item in dieRollsDifference) {
+    //calculate sum of difference
+    let chi = 0;
+    for (let item in dieRollsDifference) {
         console.log(item);
         chi = chi + dieRollsDifference[item];
-      }
-      console.log(`x**2 = ${chi}`);
-      let degreesOfFreedom = dieSides - 1;
-      console.log(`degrees of freed: ${degreesOfFreedom}`)
+    }
+    console.log(`x**2 = ${chi}`);
+    let degreesOfFreedom = dieSides - 1;
+    console.log(`degrees of freedom: ${degreesOfFreedom}`)
     
-      //check chi against critical value
-    
-      let criticalValue = criticalValues[degreesOfFreedom];
-      console.log(`criticalValue: ${criticalValue} chi: ${chi}`);
-      let fair = true;
-      if (chi > criticalValue) {
+    //check chi against critical value
+    let criticalValue = criticalValues[degreesOfFreedom];
+    console.log(`criticalValue: ${criticalValue} x**2: ${chi}`);
+    let fair = true;
+    if (chi > criticalValue) {
       fair = false
-      }
-      if (fair === false) {
+    }
+    if (fair === false) {
       output = "Your die is so not fucking fair!";
-      } else {
+    } else {
       output ="Your die is fair, blame something else!"
     }
 }
