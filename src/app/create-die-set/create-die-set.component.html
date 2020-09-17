@@ -1,19 +1,19 @@
-<div class = "main-component">
+<div class = "main-component d-flex justify-content-center">
     <form class = "form-group" [formGroup]="dieSetForm" (ngSubmit)="submitForm()" novalidate>
         <!-- Form elements goes here -->
-        <label>Name:
-            <div>
+        
+            <div> 
+                <label class="left-element">Name:</label>
                 <input
                 id="name"
                 type="text"
                 formControlName="name"
-                required
-                >
+                required>
             </div>
             <div *ngIf="!dieSetFormValid" class="alert alert-danger" role="alert">
                 name required!
             </div>
-        </label>
+        
         <br/>
         <label>Die Types:
         <div class = "form-check" *ngFor="let dieType of dieTypes; let i = index">

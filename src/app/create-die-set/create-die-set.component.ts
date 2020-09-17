@@ -55,7 +55,7 @@ export class CreateDieSetComponent implements OnInit {
   
 
   submitForm() {
-    if (!this.dieSetForm.value.name.$valid) {
+    if (this.dieSetForm.value.name.$invalid) {
       console.log("name required");
       this.dieSetFormValid = false;
     } else {
