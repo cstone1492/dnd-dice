@@ -3,9 +3,8 @@
     <form class="mx-auto mb-auto p-2" [formGroup]="dieSetsForm" (ngSubmit)="selectDieSet()">
 
         <select class="left-element" formControlName="name">
-            <option disabled>Select Die Set</option>
             <option>Choose Die Set</option> 
-            <option *ngFor="let dieSet of dieSets">{{dieSet['name']}}</option>
+            <option *ngFor="let dieSet of dieSets" required>{{dieSet['name']}}</option>
         </select>
 
         <button class = "btn btn-secondary">Submit</button>
@@ -36,8 +35,8 @@
 <div *ngIf = "displayResults" class="p-2 mx-auto outcome text-center">
 {{testResults}}
 </div>
-
-<div *ngIf = "displayHistogram" class="chart-wrapper">
+</div>
+<div *ngIf = "displayHistogram" class="main-component chart-wrapper">
     <canvas baseChart 
     [datasets]="barChartData"
     [labels]="barChartLabels"
@@ -48,5 +47,8 @@
     
   </canvas>
 </div>
-</div>
+<br>
+<br>
+<br>
+
 

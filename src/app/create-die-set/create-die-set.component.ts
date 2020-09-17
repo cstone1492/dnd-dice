@@ -5,6 +5,7 @@ import { FormComponent } from '../form/form.component';
 import { DieSetsComponent } from '../die-sets/die-sets.component';
 import {NgForm, FormArray} from '@angular/forms';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-create-die-set',
@@ -15,6 +16,8 @@ export class CreateDieSetComponent implements OnInit {
   
   dieSetForm: FormGroup;
 
+  dieSetFormValid = true;
+  
   constructor(private fb: FormBuilder) {
     this.dieSetForm = this.fb.group({
       dieTypesCheck: this.fb.array([]),
@@ -52,10 +55,10 @@ export class CreateDieSetComponent implements OnInit {
   
 
   submitForm() {
-    console.log(this.dieSetForm.value.name);
-    console.log(this.dieSetForm.value.dieTypesCheck);
-
-
+    if (!this.dieSetForm.value.name.$valid) {
+      console.log("name required");
+      this.dieSetFormValid = false;
+    } else {
     let selectedDieTypes = this.dieSetForm.value.dieTypesCheck;
     let dieSetName = this.dieSetForm.value.name;
     for (let item of selectedDieTypes) {
@@ -79,6 +82,7 @@ export class CreateDieSetComponent implements OnInit {
     //reset Form 
     (this.dieSetForm.get('dieTypesCheck') as FormArray).clear();
     this.dieSetForm.reset();
+  }
   }
 
   ngOnInit() {

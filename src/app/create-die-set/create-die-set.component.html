@@ -7,7 +7,11 @@
                 id="name"
                 type="text"
                 formControlName="name"
+                required
                 >
+            </div>
+            <div *ngIf="!dieSetFormValid" class="alert alert-danger" role="alert">
+                name required!
             </div>
         </label>
         <br/>
