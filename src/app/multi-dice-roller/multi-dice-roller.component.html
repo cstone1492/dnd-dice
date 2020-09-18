@@ -8,5 +8,32 @@
     <div *ngIf="!multi" class="row align-bottom justify-content-center">
         <button type="button" class="btn btn-secondary" (click)="multiRoll()">Roll multiple dice</button>
     </div>
+
+    <div class = "row justify-content-center" *ngIf="multi">
+        <form name='dieNumber' [formGroup]="dieNumberForm" (ngSubmit)="dieNumberSubmit()">
+
+            <select class="left-element" formControlName="name">
+                <option disabled>Select number of die</option>
+                <option *ngFor="let num of numbers">{{num}}</option>
+            </select>
+
+            <button class = "btn btn-secondary">Submit</button>
+        </form>
+    </div>
+
+    <div *ngIf="multiSelected">
+        <form class="mx-auto mb-auto p-2 align-top" name='dieType' [formGroup]='rollDieForm' (ngSubmit)="rollDie()">
+            
+            <span *ngFor="let i of Arr(num).fill(1)">
+                <select class = "left-element" formControlName="name">
+                    <option value = '' disabled>Select die type</option>
+                    <option *ngFor="let dieType of dieTypes">{{dieType}}</option>
+                </select>
+            </span>
+
+            <button type="submit" class = "btn btn-primary">Roll Die</button>
+            
+        </form>
+    </div>
     
 </div>
