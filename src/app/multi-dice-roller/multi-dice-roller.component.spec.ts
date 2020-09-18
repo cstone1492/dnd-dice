@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MultiDiceRollerComponent } from './multi-dice-roller.component';
+import { DiceRollerComponent } from './dice-roller/dice-roller.component';
 
 describe('MultiDiceRollerComponent', () => {
   let component: MultiDiceRollerComponent;

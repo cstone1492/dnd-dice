@@ -1,2 +1,12 @@
-<p>multi-dice-roller works!</p>
-{{dice-roller}}{{dice-roller}}
+<div class="main-component container-fluid">
+    
+    <div *ngIf="!multi" class="row justify-content-center">
+        <app-dice-roller></app-dice-roller>
+    </div>  
+    <br>
+    <br>
+    <div *ngIf="!multi" class="row align-bottom justify-content-center">
+        <button type="button" class="btn btn-secondary" (click)="multiRoll()">Roll multiple dice</button>
+    </div>
+    
+</div>
