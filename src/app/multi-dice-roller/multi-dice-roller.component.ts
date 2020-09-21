@@ -3,6 +3,8 @@ import { DiceRollerComponent } from '../dice-roller/dice-roller.component';
 import { BrowserModule } from '@angular/platform-browser';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder } from '@angular/forms';
+import {NgForm} from '@angular/forms';
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 
 @NgModule({
   declarations: [
@@ -25,8 +27,11 @@ export class MultiDiceRollerComponent implements OnInit {
   multiSelected = false;
   numberDie = 0;
   Arr = Array;
-  num:number = 2;
+  num: number = 0;
   numbers: any[] = [];
+  dieTypes = ['4','6','8','10','12','20']
+  dieType;
+  model: any = {};
 
   constructor(public fb:FormBuilder) { }
 
@@ -36,22 +41,37 @@ export class MultiDiceRollerComponent implements OnInit {
   }
 
   dieNumberForm = this.fb.group({
-    name: ['']
+    numberDie: ['']
   })
+
 
   multiRoll() {
     this.multi = true;
   }
 
   populateNumbers(upperLimit) {
-    for (let i = 0; i <= upperLimit; i ++) {
+    for (let i = 1; i <= upperLimit; i ++) {
       this.numbers.push(i);
     }
   }
 
   dieNumberSubmit() {
-    this.num=Number(this.dieNumberForm.value['name']);
+    this.num=Number(this.dieNumberForm.value['numberDie']);
     this.multiSelected = true;
+    for (let i = 1; i <= this.num; i ++) {
+      this.multiDieRollsForm[`${i}`] = [''];
+    }
+    console.log(this.multiDieRollsForm);
+  }
+
+  multiDieRollsForm = this.fb.group({
+  })
+
+  rollDie() {
+    
+      console.log(this.multiDieRollsForm.value)
+      
+  
   }
 
 }
