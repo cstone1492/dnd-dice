@@ -14,8 +14,9 @@ import { IfStmt } from '@angular/compiler';
 export class CreateDieSetComponent implements OnInit {
   
   dieSetForm: FormGroup;
-
   dieSetFormValid = true;
+  dieSets = [];
+  dieSetsNames = [];
   
   constructor(private fb: FormBuilder) {
     this.dieSetForm = this.fb.group({
@@ -36,6 +37,15 @@ export class CreateDieSetComponent implements OnInit {
     { name: '20', value: '20'}
   ];
 
+  retrieveDieSets() {
+    let dieSetsArray = localStorage.getItem('dieSets').split(';');
+    for (let i of dieSetsArray) {
+      this.dieSets.push(JSON.parse(i));
+      this.dieSetsNames.push(JSON.parse(i)['name'])
+    }
+    console.log(this.dieSetsNames)
+  }
+
   onCheckboxChange(e) {
     const dieTypesCheck: FormArray = this.dieSetForm.get('dieTypesCheck') as FormArray;
 
@@ -53,8 +63,6 @@ export class CreateDieSetComponent implements OnInit {
     }
   }
 
-  
-
   submitForm() {
     if (!this.dieSetForm.value.dirty && this.dieSetForm.invalid) {
       console.log("name required");
@@ -62,7 +70,15 @@ export class CreateDieSetComponent implements OnInit {
         `Name required!`
       )
       this.dieSetFormValid = false;
-    } else {
+    } else if (this.dieSetsNames.includes(this.dieSetForm.value.name)) {
+      alert(
+        `Die set ${this.dieSetForm.value.name} already exists!`
+      )
+    } else if (this.dieSetForm.value.dieTypesCheck.length == 0) {
+      alert(
+        `At least one die type required.`
+      )
+    } else{
     let selectedDieTypes = this.dieSetForm.value.dieTypesCheck;
     let dieSetName = this.dieSetForm.value.name;
     for (let item of selectedDieTypes) {
@@ -90,6 +106,7 @@ export class CreateDieSetComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.retrieveDieSets();
   }
 
   get name() { return this.dieSetForm.get('name'); }

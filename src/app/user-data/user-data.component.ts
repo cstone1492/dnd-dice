@@ -39,7 +39,6 @@ export class UserDataComponent implements OnInit {
       this.dieSets.push(JSON.parse(i));
     }
     console.log(this.dieSets)
-    
   }
 
   retrieveDieRolls(dieType: string) {
