@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { stringify } from 'querystring';
 import { formatCurrency } from '@angular/common';
 import { FormComponent } from '../form/form.component';
-import { DieSetsComponent } from '../die-sets/die-sets.component';
-import {NgForm, FormArray} from '@angular/forms';
+import {NgForm, FormArray, Validators} from '@angular/forms';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { IfStmt } from '@angular/compiler';
 
@@ -21,7 +20,9 @@ export class CreateDieSetComponent implements OnInit {
   constructor(private fb: FormBuilder) {
     this.dieSetForm = this.fb.group({
       dieTypesCheck: this.fb.array([]),
-      name: new FormControl('')
+      name: new FormControl('', [
+        Validators.required
+      ])
     })
   }
 
@@ -55,8 +56,11 @@ export class CreateDieSetComponent implements OnInit {
   
 
   submitForm() {
-    if (this.dieSetForm.value.name.$invalid) {
+    if (!this.dieSetForm.value.dirty && this.dieSetForm.invalid) {
       console.log("name required");
+      alert(
+        `Name required!`
+      )
       this.dieSetFormValid = false;
     } else {
     let selectedDieTypes = this.dieSetForm.value.dieTypesCheck;
@@ -87,4 +91,6 @@ export class CreateDieSetComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  get name() { return this.dieSetForm.get('name'); }
 }

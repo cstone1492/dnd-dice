@@ -10,9 +10,7 @@
                 formControlName="name"
                 required>
             </div>
-            <div *ngIf="!dieSetFormValid" class="alert alert-danger" role="alert">
-                name required!
-            </div>
+            
         
         <br/>
         <label>Die Types:
@@ -22,7 +20,8 @@
                 id="dieType{{dieType}}" 
                 type="checkbox" name="dieType" 
                 [value] = "dieType.value" 
-                (change)="onCheckboxChange($event)">
+                (change)="onCheckboxChange($event)"
+                >
                 {{dieType.name}}
                 </label>
         </div>
