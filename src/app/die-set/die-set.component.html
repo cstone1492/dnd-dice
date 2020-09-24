@@ -1,0 +1,18 @@
+<div class="main-component">
+    <h1>Die Sets</h1>
+    <table class = "table table-hover">
+        <tr>
+            <th scope="col">Die Set Name</th>
+            <th scope="col">Die Types</th>
+            <th scope="col">Delete Die Set</th>
+        </tr>
+        <tbody>
+            <tr *ngFor = "let dieSet of dieSets">
+                <td scope="col">{{dieSet.name}}</td>
+                <td>{{dieSet.dieTypes}}</td>
+                <td><button type = "button" class="btn btn-danger" (click)="deleteDieSet(dieSets.indexOf(dieSet))">Delete Die Set</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <a routerLink="/create-die-set">Create new die set</a>
+</div>  

@@ -1,5 +1,6 @@
-<div class = "main-component d-flex justify-content-center">
-    <form class = "form-group" [formGroup]="dieSetForm" (ngSubmit)="submitForm()" novalidate>
+<div class = "main-component d-flex flex-column align-items-md-center">
+    <h1 class="p-2">Create a new die set</h1>
+    <form class = "form-group p-2" [formGroup]="dieSetForm" (ngSubmit)="submitForm()" novalidate>
         <!-- Form elements goes here -->
         
             <div> 
@@ -26,6 +27,11 @@
                 </label>
         </div>
         </label>
-        <input type="submit" value="Submit">
+        <br>
+        <input class="p-2" type="submit" value="Submit">
     </form>
+    <br>
+    <div class="p-2">
+        <a class="nav-link" routerLink="/die-set">See existing die sets</a>
+    </div>
 </div>

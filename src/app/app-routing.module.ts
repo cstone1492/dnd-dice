@@ -6,6 +6,7 @@ import { ChiSquareFormComponent } from './chi-square-form/chi-square-form.compon
 import { CreateDieSetComponent } from './create-die-set/create-die-set.component';
 import { DiceRollerComponent } from './dice-roller/dice-roller.component';
 import { MultiDiceRollerComponent } from './multi-dice-roller/multi-dice-roller.component';
+import { DieSetComponent } from './die-set/die-set.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'chi-square-form', component: ChiSquareFormComponent},
   {path: 'create-die-set', component: CreateDieSetComponent},
   {path: 'dice-roller', component: DiceRollerComponent},
-  {path: 'multi-dice-roller', component: MultiDiceRollerComponent}
+  {path: 'multi-dice-roller', component: MultiDiceRollerComponent},
+  {path: 'die-set', component: DieSetComponent}
 ];
 
 @NgModule({

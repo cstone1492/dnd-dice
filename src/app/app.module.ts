@@ -15,6 +15,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DiceRollerComponent } from './dice-roller/dice-roller.component';
 import { MultiDiceRollerComponent } from './multi-dice-roller/multi-dice-roller.component';
+import { DieSetComponent } from './die-set/die-set.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { MultiDiceRollerComponent } from './multi-dice-roller/multi-dice-roller.
     HeaderComponent,
     FooterComponent,
     DiceRollerComponent,
-    MultiDiceRollerComponent
+    MultiDiceRollerComponent,
+    DieSetComponent
   ],
   imports: [
     BrowserModule,
