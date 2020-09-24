@@ -29,6 +29,18 @@ export class FormComponent implements OnInit {
     console.log('Your form data : ', form.value);
     let rollValue = form.value.rollValue;
     let selectedDieType = form.value.dieType;
+    if (!selectedDieType) {
+      alert (
+        `Die type required`
+      )
+      return;
+    }
+    if (Number(rollValue) > Number(selectedDieType) || Number(rollValue) < 1) {
+      alert (
+        `Invalid roll`
+      )
+      return;
+    }
     console.log(this.selectedDieSet);
     let existing = localStorage.getItem(`${this.selectedDieSet}${selectedDieType}`);
     console.log(existing);
