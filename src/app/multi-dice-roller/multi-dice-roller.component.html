@@ -5,9 +5,9 @@
     </div>  
     <br>
     <br>
-    <div *ngIf="!multi" class="row align-bottom justify-content-center">
+    <!--<div *ngIf="!multi" class="row align-bottom justify-content-center">
         <button type="button" class="btn btn-secondary" (click)="multiRoll()">Roll multiple dice</button>
-    </div>
+    </div>-->
 
     <div class = "row justify-content-center" *ngIf="multi">
         <form name='dieNumber' [formGroup]="dieNumberForm" (ngSubmit)="dieNumberSubmit()">
