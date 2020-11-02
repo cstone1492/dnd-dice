@@ -1,17 +1,19 @@
 
-<div class = "main-component">
-    <label for='dieSet'>Select die set:</label>
-    <form name='dieSet' [formGroup]="dieSetsForm" (ngSubmit)="selectDieSet()">
-
-        <select formControlName="name">
-            <option disabled>Select Die Set</option>
-            <option>Choose Die Set</option> 
-            <option *ngFor="let dieSet of dieSets">{{dieSet['name']}}</option>
-        </select>
-
-        <button class = "btn btn-secondary">Submit</button>
-    </form>
-    <a routerLink="/create-die-set">Create new die set</a> <br>
+<div class = "main-component d-flex flex-column align-items-md-center">
+    <h1 class="p-2 align-middle">Add Die Roll</h1>
+    <div>
+        <label for='dieSet'>Select die set:</label> <br>
+        <form class="mx-auto mb-auto p-2 align-top" name='dieSet' [formGroup]="dieSetsForm" (ngSubmit)="selectDieSet()">
+                <select  class="left-element" formControlName="name">
+                    <option disabled>Select Die Set</option>
+                    <option>Choose Die Set</option> 
+                    <option *ngFor="let dieSet of dieSets">{{dieSet['name']}}</option>
+                </select>
+            <button class = "btn btn-secondary">Submit</button>
+        </form>
+    
+        <a routerLink="/create-die-set">Create new die set</a> <br>
+    </div>
 
     <form  *ngIf='dieSetSelect' class = "form-group" #myform = "ngForm" (ngSubmit) = "onSubmit(myform)">
         <label class="col-sm-2 col-form-label" for='dieType'>Die Type:
